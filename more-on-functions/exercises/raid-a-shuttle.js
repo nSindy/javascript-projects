@@ -19,26 +19,43 @@ function holdStatus(arr){
 }
 
 let fuelLevel = 200000;
+let cleaningLiquid = 0;
+let a = fuelLevel;
 let cargoHold = ['meal kits', 'space suits', 'first-aid kit', 'satellite', 'gold', 'water', 'AE-35 unit'];
+let arr = cargoHold;
 
 console.log("Fuel level: " + checkFuel(fuelLevel));
 console.log("Hold status: " + holdStatus(cargoHold));
 
-/* Steal some fuel from the shuttle:
- * /
- 
+// Steal some fuel from the shuttle:
 //a). Define an anonymous function and set it equal to a variable with a normal, non-suspicious name. The function takes one parameter. This will be the fuel level on the shuttle.
-
+let bathroomDuties = function(a) {
+  while (checkFuel(a) === 'green') {
+    a -= 1; 
+    cleaningLiquid += 1; 
+  }
+  fuelLevel = a;
+  return cleaningLiquid;
+}
 //b). You must siphon off fuel without alerting the TAs. Inside your function, you want to reduce the fuel level as much as possible WITHOUT changing the color returned by the checkFuel function.
 
 //c). Once you figure out how much fuel to pump out, return that value.
 
 //d). Decide where to best place your function call to gather our new fuel.
 
-/* Next, liberate some of that glorious cargo.
- * /
 
+
+
+// Next, liberate some of that glorious cargo.
 //a). Define another anonymous function with an array as a parameter, and set it equal to another innocent variable.
+let sanitaryGearCheck = function(arr) {
+  let newArr = [];
+  let tools = ['ragged mop', 'thin-bristled broom', 'crushed spray bottle', 'filthy toilet scrubber'];
+  newArr.push(arr.splice(4, 1));
+  newArr.push(arr.splice(1, 1));
+  arr.push(tools[0], tools[3]);
+return newArr;
+}
 
 //b). You need to swipe two items from the cargo hold. Choose well. Stealing water ain’t gonna get us rich. Put the swag into a new array and return it from the function.
 
@@ -46,12 +63,17 @@ console.log("Hold status: " + holdStatus(cargoHold));
 
 //d). Don’t get hasty, matey! Remember to test your function.
 
-/* Finally, you need to print a receipt for the accountant. Don’t laugh! That genius knows MATH and saves us more gold than you can imagine.
- * /
- 
+// Finally, you need to print a receipt for the accountant. Don’t laugh! That genius knows MATH and saves us more gold than you can imagine.
+
+function irs(a, arr) {
+  let newCleaningLiquid = bathroomDuties(a);
+  let newSanitaryGear = sanitaryGearCheck(arr);
+  return `Raided ${newCleaningLiquid}kg of fuel from the tanks, and stole ${newSanitaryGear[0]} and ${newSanitaryGear[1]} from the cargo hold.`
+}
+
+console.log(irs(a, arr));
 //a). Define a function called irs that can take fuelLevel and cargoHold as arguments.
 	
 //b). Call your anonymous fuel and cargo functions from within irs.
 
 //c). Use a template literal to return, "Raided _____ kg of fuel from the tanks, and stole ____ and ____ from the cargo hold."
-
